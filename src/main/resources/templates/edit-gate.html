@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование ворот</title>
+</head>
+<body>
+
+  <section layout:fragment="content">
+
+    <div class="container">
+      <div class="row headStyle">
+          <div class="col">Редактирование ворот</div>
+      </div>
+
+        <form th:action="@{'/save-gate/'+ ${id} + '/' + ${idDev}}" method="post" class="mt-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2">
+                        <label>
+                            <p>Имя проезда</p>
+                            <select class="form-select">
+                                <option th:text="${deviceById.name}"></option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-1">
+                        <label>
+                            <p>Въезд</p>
+                            <input type="radio" th:value="1" th:field="*{gate.is_enter}">
+                        </label>
+                    </div>
+                    <div class="col-1">
+                        <label>
+                            <p>Выезд</p>
+                            <input type="radio" th:value="0" th:field="*{gate.is_enter}">
+                        </label>
+                    </div>
+                    <div class="col-3 pt-4">
+                        <button type="button" class="btn btn-secondary" onclick="history.back()">Назад</button>
+                        <button type="submit" class="btn btn-primary"> Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row headStyle mt-3">
+            <div class="col">Информация об устройствах</div>
+            <div th:text="${'ID проезда:' + idDev}"></div>
+        </div>
+
+        <form th:action="@{'/save-gate-dev/' + ${id} + '/' + ${idDev}}" method="post" class="mt-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-2">
+                        <label>
+                            <p>IP Табло:</p>
+                            <input type="text" th:field="${param.tablo_ip}">
+                        </label>
+                    </div>
+                    <div class="col-2">
+                        <label>
+                            <p>PORT Табло:</p>
+                            <input type="text"th:field="${param.tablo_port}" >
+                        </label>
+                    </div>
+                    <div class="col-2">
+                        <label>
+                            <p>IP двери:</p>
+                            <input type="text" th:field="${param.box_ip}">
+                        </label>
+                    </div>
+                    <div class="col-2">
+                        <label>
+                            <p>PORT двери:</p>
+                            <input type="text"th:field="${param.box_port}" >
+                        </label>
+                    </div>
+                    <div class="col-2">
+                        <label>
+                            <p>ID камеры:</p>
+                            <input type="text" th:field="${param.id_cam}">
+                        </label>
+                    </div>
+<!--                    <input type="hidden" th:field="${idDev}">-->
+                    <div class="col-3 pt-4">
+                        <button type="button" class="btn btn-secondary" onclick="history.back()">Назад</button>
+                        <button type="submit" class="btn btn-primary"> Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+  </section>
+
+</body>
+</html>

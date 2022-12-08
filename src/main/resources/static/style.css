@@ -1,0 +1,23 @@
+.rightPart, .leftPart{
+    border: 1px solid black;
+}
+
+.rightPart a {
+    text-decoration: none;
+    color: white;
+}
+
+.leftPart a :hover{
+    background-color: #FDEAA8;
+    color: black;
+}
+
+.leftPart p{
+    text-align: center;
+}
+
+.headStyle{
+    background-color: #CD853F;
+    color: white;
+    padding: 1%;
+}

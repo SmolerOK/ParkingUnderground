@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование места парковки</title>
+</head>
+<body>
+
+<section layout:fragment="content">
+
+    <form action="/edit-parking-impl" method="post">
+      <div class="modal-content">
+        <div class="modal-header">
+            <div class="container">
+                <div class="row headStyle">
+                    <div class="col-9">Редактирования места парковки</div>
+                    <div class="col-3" th:text="'ID парковки: ' + ${parking.id}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row pt-2">
+                <label>
+                  <input type="hidden" th:field="${parking.id}">
+                </label>
+              <div class="col-3">
+                <p>Парковка</p>
+                <label>
+                  <input type="text" th:field="${parking.name}">
+                </label>
+              </div>
+              <div class="col-1">
+                  <button type="button" onclick="history.back()" class="btn btn-secondary mt-4">Назад</button>
+              </div>
+              <div class="col-4">
+                  <button type="submit" class="btn btn-primary mt-4">Сохранить изменения</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <hr>
+
+    <div class="container">
+      <div class="row">
+          <div class="container">
+              <div class="row">
+                <table class="table">
+                  <thead>
+                  <tr>
+<!--                    <th scope="col">Номер парковки</th>-->
+<!--                    <th scope="col">Номер проезда</th>-->
+                    <th scope="col">Название проезда</th>
+<!--                    <th scope="col">Номер базы данных</th>-->
+                    <th scope="col">Название стороны проезда</th>
+                  </tr>
+                  </thead>
+                      <tbody th:each="parkingGate : ${parkingGate}">
+                          <form th:action="@{'/delete-gate/'+ ${parking.id} + '/' + ${parkingGate.id_dev}}" th:method="post" onsubmit="return confirm('Подтвердите удаление.')"\>
+                              <tr>
+<!--                                <td th:text="${parkingGate.id_parking}"></td>-->
+<!--                                <td th:text="${parkingGate.id_dev}"></td>-->
+                                <td th:text="${parkingGate.name + ' (' + parkingGate.id} + ')'"></td>
+<!--                                <td th:text="${parkingGate.id_db}"></td>-->
+                                <td th:if="${parkingGate.is_enter == '1'}"><u>Въезд</u></td>
+                                <td th:if="${parkingGate.is_enter == '0'}">Выезд</td>
+                                  <td>
+                                      <button type="submit" class="btn btn-secondary" th:value="delete">Удалить</button>
+                                  </td>
+                                  <td>
+                                      <button type="button" class="btn btn-primary">
+                                          <a th:href="@{'/edit-gate/' + ${parking.id} + '/' + ${parkingGate.id_dev}}">Изменить</a>
+                                      </button>
+                                  </td>
+                              </tr>
+                          </form>
+                      </tbody>
+                </table>
+            </div>
+          </div>
+
+      </div>
+        <button type="button" class="btn btn-primary mb-3">
+            <a th:href="@{'/add-gate/' + ${parking.id}}">Добавить ворота</a>
+        </button>
+    </div>
+
+    <div class="container">
+    <div class="row headStyle">
+        <div class="col">Список машин на парковке</div>
+    </div>
+            <div class="container">
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Время въезда</th>
+                            <th scope="col">Номера</th>
+                            <th scope="col">Парковочная группа</th>
+                            <th scope="col">Имя парковки</th>
+                        </tr>
+                        </thead>
+                        <tbody th:each="inside : ${parkingInside}">
+                        <tr>
+                            <th th:text="${inside.entertime}"></th>
+                            <td th:text="${inside.id_card}"></td>
+                            <td th:text="${inside.counterid}"></td>
+                            <td th:text="${inside.parkingname}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

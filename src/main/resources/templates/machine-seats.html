@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      layout:decorate="~{layout}"
+      xsi:schemaLocation="http://www.ultraq.net.nz/thymeleaf/layout ">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Машинные места</title>
+</head>
+<body>
+
+<section layout:fragment="content">
+
+                <div class="container">
+                    <div class="row headStyle">Список парковок</div>
+                    <div class="row m-2">
+                        <table class="table">
+                            <thead>
+                            <tr>
+<!--                                <th scope="col" >Номер проезда</th>-->
+<!--                                <th scope="col" >Номер базы данных</th>-->
+                                <th scope="col" >Имя парковки</th>
+<!--                                <th scope="col" >Въезд/Выезд</th>-->
+                            </tr>
+                            </thead>
+                            <tbody th:each="parking : ${parking}">
+                            <tr>
+<!--                                <th scope="row" th:text="${parking.id}"></th>-->
+<!--                                <td th:text="${parking.id_db}"></td>-->
+                                <td th:text="${parking.name}" ></td>
+<!--                                <td th:text="${parking.enabled}"></td>-->
+                                <td>
+
+                                    <form th:action="@{'/delete-parking/' + ${parking.id}}" method="post" onsubmit="return confirm('Подтвердите удаление.')">
+                                        <button class="btn btn-secondary" type="submit">Удалить</button>
+                                    </form>
+                                </td>
+                                <td>
+
+                                    <button class="btn btn-primary">
+                                        <a th:href="@{'/edit-parking/' + ${parking.id}}" style="color: white; text-decoration: none">Изменить</a>
+                                    </button>
+<!--                                    <a th:href="@{'/machine-seats/' + ${parking.id}}" data-bs-toggle="modal" data-bs-target="#editParking">Изменить</a>-->
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <!-- Кнопка-триггер модального окна -->
+<!--                        <div class="col-2 m-3 "><button class="btn btn-primary" type="submit" >Редактировать</button></div>-->
+<!--                        <div class="col-2 m-3"><button class="btn btn-primary" type="submit">Удалить</button>-->
+                        </div>
+                    </div>
+
+<!--                </div>-->
+<!--            </div>-->
+                <div class="container p-0">
+                    <div class="container">
+                        <div class="row headStyle">Добавить парковку</div>
+                        <div class="row m-3">
+                            <div class="col  m-2">Добавить новую парковку для оргнизации</div>
+                            <form th:action="@{/insertParking}" method="post" th:object="${insertParking}">
+                                <div class="col">
+                                    <label>
+                                        <input class=" m-2" type="text" th:field="*{name}">
+                                    </label>
+                                    <button class="btn btn-primary m-2" type="submit">Добавить</button>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+<!--             <div class="container p-0">-->
+<!--                    <div class="container">-->
+<!--                        <div class="row headStyle">Общие параметры парковочной системы</div>-->
+<!--                        <div class="row m-2">-->
+<!--                            <div class="col">-->
+<!--                                <p><b>Автоматическая регистрация карт при выдаче.</b></p>-->
+<!--                            </div>-->
+<!--                            <div class="col"><input type="text" value="0" name="" id=""></div>-->
+
+<!--                            <p>0 - карты автоматически не регистрируются.</p>-->
+<!--                            <p>1 - неизвестные карты будут зарегистрированы на парковочные.</p>-->
+<!--                        </div>-->
+<!--                        <div class="row m-2">-->
+<!--                            <div class="col">-->
+<!--                                <p><b>Режим работы стойки въезда.</b></p>-->
+<!--                            </div>-->
+<!--                            <div class="col"><input type="text" value="1" name=""></div>-->
+
+<!--                            <p>0 - выдаем только валидные карты.</p>-->
+<!--                            <p>1 - выдаем все карты (даже если находятся на территоории)</p>-->
+<!--                        </div>-->
+<!--                        <div class="row m-2">-->
+<!--                            <div class="col">-->
+<!--                                <p><b>Режим работы стойки выезда.</b></p>-->
+<!--                            </div>-->
+<!--                            <div class="col">-->
+<!--                                <input type="text" value="2" name="">-->
+<!--                                <div class="p-0 mt-2"><button class="btn btn-primary" type="submit">Изменить и-->
+<!--                                    сохранить настройки</button></div>-->
+<!--                            </div>-->
+<!--                            <p>&#45;&#45; значение бита 0 - отдаем карту обратно, 1 - скидываем в бункер</p>-->
+<!--                            <p>&#45;&#45; бит 0: режим приема неактивных карт</p>-->
+<!--                            <p>&#45;&#45; бит 1: режим приема карт не находящихся на территории</p>-->
+<!--                            <p>&#45;&#45; бит 2: режим приема неизвестных карт</p>-->
+<!--                            <p>&#45;&#45; бит 3: режим приема нечитающихся карт</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+</section>
+
+</body>
+</html>
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление ворот</title>
+</head>
+<body>
+
+<section layout:fragment="content">
+
+  <form th:action="@{'/adding-gate/' + ${id}}" method="post">
+  <div class="container">
+    <div class="row headStyle">
+      <div class="col">Добавление ворот</div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <label>
+          <p>Имя проезда</p>
+          <input type="text" th:field="*{gate.name}">
+<!--          <select class="form-select" th:field="*{gate.id_dev}">-->
+<!--            <option th:each="device : ${device}" th:value="${device.id_dev}" th:text="${device.name}"></option>-->
+<!--          </select>-->
+        </label>
+      </div>
+
+      <div class="col-1">
+        <label>
+          <p>Въезд</p>
+          <input type="radio" th:value="1" th:field="*{gate.is_enter}">
+        </label>
+      </div>
+
+      <div class="col-1">
+        <label>
+          <p>Выезд</p>
+          <input type="radio" th:value="0" th:field="*{gate.is_enter}">
+        </label>
+      </div>
+
+      <div class="col pt-4">
+        <button type="button" class="btn btn-secondary" onclick="history.back()">Назад</button>
+        <button type="submit" class="btn btn-primary"> Сохранить</button>
+      </div>
+  </div>
+  </div>
+  </form>
+
+</section>
+
+</body>
+</html>
